@@ -1,2 +1,8 @@
 # vim temporary files
 *.sw[op]
+
+# byte compiled files
+*.py[oc]
+
+# database
+*.db
