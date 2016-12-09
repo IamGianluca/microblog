@@ -10,7 +10,7 @@ class User(db.Model):
     def __repr__(self):
         return '<User {}'.format(self.nickname)
 
-class Posts(db.Model):
+class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime)
