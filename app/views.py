@@ -6,7 +6,7 @@ from .forms import LoginForm
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'nickname': 'Miguel'}  # fake user
+    user = {'nickname': 'Gianluca'}  # fake user
     posts = [  # fake array of posts
              {
                  'author': {'nickname': 'John'},
@@ -14,11 +14,15 @@ def index():
              },
              {
                  'author': {'nickname': 'Susan'},
-                 'body': 'The Avengers movie was so cool!'
+                 'body': 'Bayesian statistics is so cool!'
              },
              {
                  'author': {'nickname': 'Brig'},
-                 'body': "I'll keep trying"
+                 'body': "Lucs! Huuulp!"
+             },
+             {
+                 'author': {'nickname': 'Gianluca'},
+                 'body': 'I like building web apps!'
              }
             ]
     return render_template('index.html',
