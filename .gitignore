@@ -6,3 +6,7 @@
 
 # database
 *.db
+db_repository/
+
+# temporary files
+tmp/
