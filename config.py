@@ -1,7 +1,6 @@
 import os
 
 
-
 # database settings
 basedir = os.path.abspath(os.path.dirname(__file__))
 SQLALCHEMY_DATABASE_URI = ''.join(['sqlite:///',
@@ -21,3 +20,12 @@ OPENID_PROVIDERS = [
     {'name': 'Flickr', 'url': r'http://www.flickr.com/<username>' },
     {'name': 'MyOpenID', 'url': 'https://www.myopenid.com'}
 ]
+
+# mail server settings
+MAIL_SERVER = 'localhost'
+MAIL_PORT = 25
+MAIL_USERNAME = None
+MAIL_PASSWD = None
+
+# administrator list
+ADMINS = [os.environ['ADMIN_MAIL_ADDRESS']]
