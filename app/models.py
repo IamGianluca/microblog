@@ -29,6 +29,18 @@ class User(db.Model):
         except NameError:
             return str(self.id)  # python 3
 
+    @staticmethod
+    def make_unique_nickname(nickname):
+        if User.query.filter_by(nickname=nickname).first() is None:
+            return nickname
+        version = 2
+        while True:
+            new_nickname = nickname + str(version)
+            if User.query.filter_by(nickname=new_nickname).first() is None:
+                break
+            version += 1
+        return new_nickname
+
     def avatar(self, size):
         return 'http://www.gravatar.com/avatar/{}?d=mm&s={}'.\
                 format(md5(self.email.encode('utf-8')).hexdigest(), size)
