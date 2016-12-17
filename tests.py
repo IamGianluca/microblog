@@ -121,6 +121,6 @@ class TestCase():
         assert_equal(len(f3), 2)
         assert_equal(len(f4), 1)
         assert_equal(f1, [p4, p2, p1])
-        assert f2 == [p3, p2]
-        assert f3 == [p4, p3]
-        assert f4 == [p4]
+        assert_equal(f2, [p3, p2])
+        assert_equal(f3, [p4, p3])
+        assert_equal(f4, [p4])

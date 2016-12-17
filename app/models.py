@@ -56,16 +56,40 @@ class User(db.Model):
         return new_nickname
 
     def follow(self, user):
+        """Follow another user.
+
+        Args:
+            user: [User] The user to follow.
+        Returns:
+            [User] Object that has to be added to the database session and
+            committed.
+        """
         if not self.is_following(user):
             self.followed.append(user)
             return self
 
     def unfollow(self, user):
+        """Unfollow a user that is currently being followed.
+
+        Args:
+            user: [User] The currently followed user that has to be unfollowed.
+        Returns:
+            [User] An object that has to be added to the database session and
+            committed.
+        """
         if self.is_following(user):
             self.followed.remove(user)
             return self
 
     def is_following(self, user):
+        """Check if the user is following the user passed as argument.
+
+        Args:
+            user: [User] The user that you want to check if is being followed.
+        Returns:
+            [Bool] True is the user passed as argument is being followed by the
+            'self' user. False if the 'self' user is not following the user
+            passed in the argument of the function."""
         return self.followed.filter(followers.c.followed_id == user.id).\
                 count() > 0
 
