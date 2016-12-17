@@ -94,6 +94,11 @@ class User(db.Model):
                 count() > 0
 
     def followed_posts(self):
+        """Get followed posts, so those published by followed users.
+
+        Returns:
+            [flask_sqlalchemy.BaseQuery] Query object.
+        """
         return Post.query.join(followers,
                                (followers.c.followed_id == Post.user_id)).\
                 filter(followers.c.follower_id == self.id).\
