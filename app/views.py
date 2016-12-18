@@ -5,8 +5,8 @@ from flask import render_template, flash, redirect, session, url_for, \
 from flask_login import login_user, logout_user, current_user, login_required
 
 from app import app, db, lm, oid
-from .forms import LoginForm, EditForm
-from .models import User
+from app.forms import LoginForm, EditForm, PostForm
+from app.models import User, Post
 
 
 @app.errorhandler(400)
@@ -30,11 +30,18 @@ def before_request():
         db.session.add(g.user)
         db.session.commit()
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    user = g.user
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, timestamp=datetime.utcnow(),
+                    author=g.user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post is now live!')
+        return redirect(url_for('index'))
     posts = [  # fake array of posts
              {
                  'author': {'nickname': 'John'},
@@ -55,7 +62,7 @@ def index():
             ]
     return render_template('index.html',
                            title='Home',
-                           user=user,
+                           form=form,
                            posts=posts)
 
 @app.route('/login', methods=['GET', 'POST'])
