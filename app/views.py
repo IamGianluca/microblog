@@ -42,24 +42,7 @@ def index():
         db.session.commit()
         flash('Your post is now live!')
         return redirect(url_for('index'))
-    posts = [  # fake array of posts
-             {
-                 'author': {'nickname': 'John'},
-                 'body': 'Beautiful day in Portland!'
-             },
-             {
-                 'author': {'nickname': 'Susan'},
-                 'body': 'Bayesian statistics is so cool!'
-             },
-             {
-                 'author': {'nickname': 'Brig'},
-                 'body': "Lucs! Huuulp!"
-             },
-             {
-                 'author': {'nickname': 'Gianluca'},
-                 'body': 'I like building web apps!'
-             }
-            ]
+    posts = g.user.followed_posts().all()
     return render_template('index.html',
                            title='Home',
                            form=form,
@@ -150,7 +133,7 @@ def unfollow(nickname):
     if u is None:
         flash('Cannot unfollow {}.'.format(nickname=nickname))
         return redirect(url_for('user', nickname=nickname))
-    db.session(add(u))
+    db.session.add(u)
     db.session.commit()
     flash('You have stopped following {}.'.format(nickname))
     return redirect(url_for('user', nickname=nickname))
