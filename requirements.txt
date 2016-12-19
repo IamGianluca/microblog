@@ -1,16 +1,16 @@
 Babel==2.3.4
-blinker==1.4
+blinker==1.3
 click==6.6
 coverage==4.2
 decorator==4.0.10
 defusedxml==0.4.1
-Flask==0.11.1
+Flask==0.10.1
 Flask-Babel==0.11.1
 Flask-Login==0.4.0
 Flask-Mail==0.9.1
 Flask-OpenID==1.2.5
-Flask-SQLAlchemy==2.1
-Flask-WhooshAlchemy==0.56
+Flask-SQLAlchemy==1.0
+-e git://github.com/IamGianluca/Flask-WhooshAlchemy.git@f1b49eb8bfc7378456b7f80ede9e2058fcec4f59#egg=Flask_WhooshAlchemy
 Flask-WTF==0.13.1
 flipflop==1.0
 guess-language==0.2
@@ -27,5 +27,5 @@ sqlalchemy-migrate==0.10.0
 sqlparse==0.2.2
 Tempita==0.5.2
 Werkzeug==0.11.11
-Whoosh==2.7.4
+Whoosh==2.6.0
 WTForms==2.1

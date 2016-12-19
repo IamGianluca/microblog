@@ -32,3 +32,7 @@ ADMINS = [os.environ['ADMIN_MAIL_ADDRESS']]
 
 # pagination
 POST_PER_PAGE = 3
+
+# whooshalchemy
+WHOOSH_BASE = os.path.join(basedir, 'search.db')
+MAX_SEARCH_RESULTS = 50
