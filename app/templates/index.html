@@ -23,9 +23,7 @@
       </table>
   </form>
   {% for post in posts.items %}
-  <p>
-    {{ post.author.nickname }} says: <b>{{ post.body }}</b>
-  </p>
+    {% include 'post.html' %}
   {% endfor %}
   {% if posts.has_prev %}<a href='{{ url_for('index', page=posts.prev_num)
   }}'>&lt;&lt; Newer posts</a>{% else %}&lt;&lt; Newer posts{% endif %} |
