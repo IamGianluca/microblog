@@ -10,7 +10,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # security options
 WTF_CSRF_ENABLED = True
-SECRET_KEY = os.environ['MICROBLOG_SECRET']
+SECRET_KEY = os.environ.get('MICROBLOG_SECRET')
 
 # login format for OpenID providers
 OPENID_PROVIDERS = [
@@ -21,14 +21,16 @@ OPENID_PROVIDERS = [
     {'name': 'MyOpenID', 'url': 'https://www.myopenid.com'}
 ]
 
-# mail server settings
-MAIL_SERVER = 'localhost'
-MAIL_PORT = 25
-MAIL_USERNAME = None
-MAIL_PASSWD = None
+# email server
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 465
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 
 # administrator list
-ADMINS = [os.environ['ADMIN_MAIL_ADDRESS']]
+ADMINS = [os.environ.get('ADMIN_MAIL_ADDRESS')]
 
 # pagination
 POST_PER_PAGE = 3

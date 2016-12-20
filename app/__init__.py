@@ -2,10 +2,11 @@ import os
 
 from flask import Flask
 from flask_login import LoginManager
+from flask_mail import Mail
 from flask_openid import OpenID
 from flask_sqlalchemy import SQLAlchemy
 from config import basedir, ADMINS, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME,\
-        MAIL_PASSWD
+        MAIL_PASSWORD
 
 
 app = Flask(__name__)
@@ -15,7 +16,7 @@ lm = LoginManager()
 lm.init_app(app)
 lm.login_view = 'login'
 oid = OpenID(app, os.path.join(basedir, 'tmp'))
-
+mail = Mail(app)
 
 # enable logging
 if not app.debug:
@@ -30,19 +31,6 @@ if not app.debug:
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
     app.logger.info('microblog startup')
-
-# enable emails when not in debugging mode
-if not app.debug:
-    import logging
-    from logging.handlers import SMTPHandler
-    credentials = None
-    if MAIL_USERNAME or MAIL_PASSWD:
-        credentials = (MAIL_USERNAME, MAIL_PASSWD)
-    mail_handler = SMTPHandler((MAIL_SERVER, MAIL_PORT), 'no-reply@' +
-                               MAIL_SERVER, ADMINS, 'micro blog failure',
-                               credentials)
-    mail_handler.setLevel(logging.ERROR)
-    app.logger.addHandler(mail_handler)
 
 
 from app import views, models
